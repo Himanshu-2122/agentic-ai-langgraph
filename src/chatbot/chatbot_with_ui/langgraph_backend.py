@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langgraph.graph.message import add_messages , BaseMessage 
 from langgraph.checkpoint.memory import MemorySaver
 from langchain.messages import HumanMessage
-from langchain_ollama import ChatOllama
+
 
 load_dotenv()
 # defining the model 
@@ -13,14 +13,6 @@ load_dotenv()
 model = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
         temperature=1.0,
-)
-
-
-# ollama model implementation
-model_ollama = ChatOllama(
-    model="huihui_ai/qwen3-abliterated:8b-v2",
-    temperature=0.7,
-    reasoning=False,   # qwen3 ka <think> output band karne ke liye
 )
 
 # defining the state 
@@ -56,7 +48,7 @@ Your responsibilities:
 
     # passing prompt among with user input to the model and extratcing the content part becouse model response have multiple other fields
 
-    output = model.invoke(message).content
+    output = model.invoke(prompt).content
 
     # passin the output back to state
 
